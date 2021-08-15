@@ -23,7 +23,7 @@ class AuthController extends Controller
                         return response()->json(['error' => 'could_not_create_token'], 500);
                 }
                
-                $token = 'Bearer '+$jwt_token;
+                $token = 'Bearer '. $jwt_token;
                 return response()->json(compact('token'));
         }
 
@@ -46,7 +46,7 @@ class AuthController extends Controller
                 ]);
 
                 $jwt_token = JWTAuth::fromUser($user);
-                $token = 'Bearer '+ $jwt_token;
+                $token = 'Bearer '. $jwt_token;
 
                 return response()->json(compact('user', 'token'), 201);
         }
