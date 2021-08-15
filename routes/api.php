@@ -10,11 +10,10 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::group(['middleware'=>['api','authorize'],'prefix' => 'auth'],function(){
-    Route::post('/logout', [AuthController::class, 'logout']);  
-});
-
 Route::group(['middleware'=>['api','authorize']],function(){
     Route::post('store-file',[DocumentController::class, 'store']);
-    Route::get('/profile', [AuthController::class, 'userProfile']);    
+    Route::prefix("auth")->group(function(){
+        Route::post('/logout', [AuthController::class, 'logout']);  
+        Route::get('/profile', [AuthController::class, 'userProfile']);   
+    });
 });
