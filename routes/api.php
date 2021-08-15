@@ -10,8 +10,8 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::group(['middleware'=>['api','authorize']],function(){
-    Route::get('/profile', [AuthController::class, 'userProfile']);   
+Route::group(['middleware'=>['api','authorize'],'prefix' => 'auth'],function(){
+    Route::post('/logout', [AuthController::class, 'logout']);  
 });
 
 Route::group(['middleware'=>['api','authorize']],function(){
