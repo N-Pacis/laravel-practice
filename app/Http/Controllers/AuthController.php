@@ -16,14 +16,15 @@ class AuthController extends Controller
                 $credentials = $request->only('email', 'password');
 
                 try {
-                        if (!$token = JWTAuth::attempt($credentials)) {
+                        if (!$jwt_token = JWTAuth::attempt($credentials)) {
                                 return response()->json(['error' => 'invalid_credentials'], 400);
                         }
                 } catch (JWTException $e) {
                         return response()->json(['error' => 'could_not_create_token'], 500);
                 }
-
-                return response()->json(compact('Bearer token'));
+               
+                $token = 'Bearer '+$jwt_token;
+                return response()->json(compact('token'));
         }
 
         public function register(Request $request)
@@ -44,9 +45,10 @@ class AuthController extends Controller
                         'password' => Hash::make($request->get('password')),
                 ]);
 
-                $token = JWTAuth::fromUser($user);
+                $jwt_token = JWTAuth::fromUser($user);
+                $token = 'Bearer '+ $jwt_token;
 
-                return response()->json(compact('user', 'Bearer token'), 201);
+                return response()->json(compact('user', 'token'), 201);
         }
 
         public function userProfile()
