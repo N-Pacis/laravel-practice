@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Redirect,Response,File;
 use App\Models\Documents;
 use Validator;
 
