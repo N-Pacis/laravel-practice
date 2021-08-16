@@ -11,9 +11,9 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware'=>['api','authorize']],function(){
-    Route::get('/profile', [AuthController::class, 'userProfile']);   
     Route::post('store-file',[DocumentController::class, 'store']);
     Route::prefix("auth")->group(function(){
+        Route::get('/profile', [AuthController::class, 'userProfile']);   
         Route::post('/logout', [AuthController::class, 'logout']);  
     });
 });
