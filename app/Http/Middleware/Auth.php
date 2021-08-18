@@ -21,6 +21,7 @@ class Auth extends BaseMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            echo $user;
         } 
         catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
