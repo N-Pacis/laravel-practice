@@ -21,7 +21,6 @@ class Auth extends BaseMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            echo $user;
         } 
         catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
@@ -32,6 +31,9 @@ class Auth extends BaseMiddleware
                 return response()->json(['status' => 'Authorization Token not found']);
             }
         }
+
+        $request->merge(array("user" => $user));
+        $request->request->add(['user', $user]);
         return $next($request);
     }
 }

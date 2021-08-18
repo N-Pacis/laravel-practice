@@ -20,16 +20,18 @@ class DocumentController extends Controller
 
         if($files = $request->file('file')){
             $file = $request->file->store('public/documents');
+            $filename =  explode("/",$file);
 
+            $user_profile = $request->all()['user'];
             $document = new Documents();
-            $document->title = $file;
-            $document->user_id = $request->user_id;
+            $document->title = 'storage/documents/'.$filename[2];
+            $document->user_id = $user_profile->id;
             $document->save();
 
             return response()->json([
                 "success"=>true,
                 "message"=>"File successfully uploaded",
-                "file"=>$file
+                "data"=>$document
             ]);
         }
     }
