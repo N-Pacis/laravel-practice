@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/documentation',function(){
-    return view('vendor\l5-swagger\index');
+    return Redirect::to('https://laravel-practice-pacis.herokuapp.com/api/documentation');
 });

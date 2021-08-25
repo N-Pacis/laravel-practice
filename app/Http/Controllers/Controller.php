@@ -10,5 +10,15 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    /** @OA\Info(title="Laravel practice API", version="0.1") */
+    /**
+     *  @OA\Info(title="Laravel practice API", version="0.1")
+     * @OA\SecurityScheme(
+     *    securityScheme="bearerAuth",
+     *    in="header",
+     *    name="bearerAuth",
+     *    type="http",
+     *    scheme="bearer",
+     *    bearerFormat="JWT",
+     * )
+    */    
 }

@@ -20,10 +20,12 @@ class AuthController extends Controller
         *      description="Returns a token",
         *      @OA\RequestBody(
         *          required=true,
+        *          @OA\JsonContent(ref="#/components/schemas/LoginUserRequest")
         *      ),
         *      @OA\Response(
         *          response=201,
         *          description="Successful operation",
+        *          @OA\JsonContent(ref="#/components/schemas/User")
         *       ),
         *      @OA\Response(
         *          response=400,
@@ -55,10 +57,12 @@ class AuthController extends Controller
         *      description="Returns user information and token",
         *      @OA\RequestBody(
         *          required=true,
+        *          @OA\JsonContent(ref="#/components/schemas/RegisterUserRequest")
         *      ),
         *      @OA\Response(
         *          response=201,
         *          description="Successful operation",
+        *          @OA\JsonContent(ref="#/components/schemas/User")
         *       ),
         *      @OA\Response(
         *          response=400,
@@ -93,12 +97,16 @@ class AuthController extends Controller
         * @OA\Get(
         *      path="/api/auth/profile",
         *      operationId="getUserInfo",
-        *      tags={"UserProjects"},
+        *      tags={"User"},
         *      summary="Get the information of logged in user",
         *      description="Returns object of user information",
+        *       security={
+        *           {"bearerAuth": {}}
+        *       },
         *      @OA\Response(
         *          response=200,
         *          description="Successful operation",
+        *          @OA\JsonContent(ref="#/components/schemas/User")
         *       ),
         *      @OA\Response(
         *          response=401,
