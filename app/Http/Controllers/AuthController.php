@@ -11,7 +11,26 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
-
+        /**
+        * @OA\Post(
+        *      path="/api/auth/login",
+        *      operationId="userLogin",
+        *      tags={"User"},
+        *      summary="Login to your account",
+        *      description="Returns a token",
+        *      @OA\RequestBody(
+        *          required=true,
+        *      ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Successful operation",
+        *       ),
+        *      @OA\Response(
+        *          response=400,
+        *          description="Bad Request"
+        *      ),
+        * )
+        */
         public function login(Request $request)
         {
             $credentials = $request->only('email', 'password');
@@ -27,6 +46,26 @@ class AuthController extends Controller
             return response()->json(compact('token'));
         }
 
+        /**
+        * @OA\Post(
+        *      path="/api/auth/register",
+        *      operationId="registerUser",
+        *      tags={"User"},
+        *      summary="Register a new user",
+        *      description="Returns user information and token",
+        *      @OA\RequestBody(
+        *          required=true,
+        *      ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Successful operation",
+        *       ),
+        *      @OA\Response(
+        *          response=400,
+        *          description="Bad Request"
+        *      ),
+        * )
+        */
         public function register(Request $request)
         {
                 $validator = Validator::make($request->all(), [
@@ -50,6 +89,27 @@ class AuthController extends Controller
             return response()->json(compact('user','token'),201);
         }
 
+       /**
+        * @OA\Get(
+        *      path="/api/auth/profile",
+        *      operationId="getUserInfo",
+        *      tags={"UserProjects"},
+        *      summary="Get the information of logged in user",
+        *      description="Returns object of user information",
+        *      @OA\Response(
+        *          response=200,
+        *          description="Successful operation",
+        *       ),
+        *      @OA\Response(
+        *          response=401,
+        *          description="Unauthenticated",
+        *      ),
+        *      @OA\Response(
+        *          response=403,
+        *          description="Forbidden"
+        *      )
+        *     )
+        */
         public function userProfile(Request $request)
             {
                 $user_profile = $request->instance()->query('user');

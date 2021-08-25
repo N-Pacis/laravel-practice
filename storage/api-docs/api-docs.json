@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel practice API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login to your account",
+                "description": "Returns a token",
+                "operationId": "userLogin",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register a new user",
+                "description": "Returns user information and token",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/auth/profile": {
+            "get": {
+                "tags": [
+                    "UserProjects"
+                ],
+                "summary": "Get the information of logged in user",
+                "description": "Returns object of user information",
+                "operationId": "getUserInfo",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
